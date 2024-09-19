@@ -1,7 +1,7 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Field, Form, Formik } from "formik";
 import styles from "./SearchBar.module.css";
-const SearchBar = () => {
+const SearchBar = ({ setQuery }) => {
   const initialValues = {
     query: "",
   };

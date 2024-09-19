@@ -1,8 +1,17 @@
 import axios from 'axios';
 
-export const fetchArticles = async () => {
-    const YOUR_ACCESS_KEY = "WLG1_Cin7ua-cm4zH-zz4qkuzJxaK3v3FFYnbm7tQcg";
-  const { data } = await axios.get(`https://api.unsplash.com/photos/?client_id=${YOUR_ACCESS_KEY}`);
-  return data();
-};
+export const fetchArticles = async (pageNumber, searchQuery) => {
+  const YOUR_ACCESS_KEY = "WLG1_Cin7ua-cm4zH-zz4qkuzJxaK3v3FFYnbm7tQcg";
+  const response = await axios.get('https://api.unsplash.com/search/photos', {
+    params: {
+      query: searchQuery,
+      page: pageNumber,
+      per_page: 15,
+    },
+    headers: {
+      Authorization: `Client-ID ${YOUR_ACCESS_KEY}`,
+    },
+  });
 
+  return response.data;
+};
