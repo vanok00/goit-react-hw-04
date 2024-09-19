@@ -5,6 +5,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "../SearchBar/SearchBar";
+import styles from "./App.module.css";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -45,7 +46,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <SearchBar setQuery={handleSetQuery} />
       {images.length > 0 && <ImageGallery images={images} />}
       {isLoading && <Loader />}

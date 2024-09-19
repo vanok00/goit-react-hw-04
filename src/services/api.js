@@ -6,7 +6,7 @@ export const fetchArticles = async (pageNumber, searchQuery) => {
     params: {
       query: searchQuery,
       page: pageNumber,
-      per_page: 15,
+      per_page: 20,
     },
     headers: {
       Authorization: `Client-ID ${YOUR_ACCESS_KEY}`,

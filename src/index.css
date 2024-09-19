@@ -15,9 +15,13 @@
 input {
   border: none;
 }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
 a {
-  font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
@@ -59,4 +63,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+img {
+  display: block;
+  width: 466px;
+  height: 250px;
+  object-fit: cover;
 }
