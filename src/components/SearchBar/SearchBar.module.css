@@ -1,0 +1,19 @@
+.searchBar {
+  display: flex;
+  margin-top: 0;
+  justify-content: center;
+  background-color: blue;
+  border: 1px rgb(3, 0, 202) solid;
+  gap: 0;
+}
+
+.searchInput {
+  width: 60vh;
+}
+.searchBtn {
+  border-radius: 0%;
+  border: none;
+  &:hover {
+    background-color: rgb(111, 111, 243);
+  }
+}

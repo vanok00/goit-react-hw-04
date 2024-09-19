@@ -1,6 +1,7 @@
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Field, Form, Formik } from "formik";
 import styles from "./SearchBar.module.css";
-const SearchBar = ({ setQuery }) => {
+const SearchBar = () => {
   const initialValues = {
     query: "",
   };
@@ -10,16 +11,19 @@ const SearchBar = ({ setQuery }) => {
   };
 
   return (
-    <div className={styles.searchBar}>
+    <div>
       <header>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          <Form>
+          <Form className={styles.searchBar}>
+            <button type="submit" className={styles.searchBtn}>
+              <FaMagnifyingGlass />
+            </button>
             <Field
+              className={styles.searchInput}
               name="query"
               type="text"
               placeholder="Search images and photos"
             />
-            <button type="submit">Search</button>
           </Form>
         </Formik>
       </header>
