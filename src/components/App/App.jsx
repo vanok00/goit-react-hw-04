@@ -5,7 +5,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "../SearchBar/SearchBar";
-import styles from "./App.module.css";
+import ImageModal from "../ImageModal/ImageModal";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -13,6 +13,9 @@ const App = () => {
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalImage, setModalImage] = useState("");
+  const [alt, setAlt] = useState("");
 
   useEffect(() => {
     if (!query) return;
@@ -23,7 +26,7 @@ const App = () => {
         setIsLoading(true);
         const data = await fetchArticles(page, query);
         setImages((prev) => [...prev, ...data.results]);
-      } catch (error) {
+      } catch {
         setIsError(true);
       } finally {
         setIsLoading(false);
@@ -43,16 +46,40 @@ const App = () => {
     setPage(1);
   };
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const handleModalContent = (src, alt) => {
+    setModalImage(src);
+    setAlt(alt);
+  };
+
   return (
-    <div className={styles.container}>
+    <>
       <SearchBar setQuery={handleSetQuery} />
-      {images.length > 0 && <ImageGallery images={images} />}
+      {images.length > 0 && (
+        <ImageGallery
+          images={images}
+          openModal={openModal}
+          closeModal={closeModal}
+          modalContent={handleModalContent}
+        />
+      )}
       {isLoading && <Loader />}
       {isError && query && <ErrorMessage />}
       {images.length > 0 && !isLoading && !isError && (
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
-    </div>
+      <ImageModal
+        openModal={modalIsOpen}
+        closeModal={closeModal}
+        src={modalImage}
+        alt={alt}
+      />
+    </>
   );
 };
 

@@ -1,22 +1,10 @@
-import { toast } from "react-hot-toast";
 import { useEffect } from "react";
-const ErrorMessage = ({ message, type }) => {
-  const showToast = () => {
-    if (type === "success") {
-      toast.success(message);
-    } else if (type === "error") {
-      toast.error(message);
-    } else {
-      toast(message);
-    }
-  };
+import toast from "react-hot-toast";
 
-  // Викликаємо тост лише один раз після рендерингу компонента
+export default function ErrorMessage() {
   useEffect(() => {
-    showToast();
-  }, []); // Порожній масив залежностей гарантує виклик лише один раз
+    toast.error("Something went wrong!");
+  }, []);
 
-  return null; // Компонент не потребує рендерингу HTML
-};
-
-export default ErrorMessage;
+  return null;
+}

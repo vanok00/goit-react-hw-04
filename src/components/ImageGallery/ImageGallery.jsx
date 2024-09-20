@@ -1,16 +1,15 @@
 import styles from "./ImageGallery.module.css";
+import ImageCard from "../ImageCard/ImageCard";
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, openModal, modalContent }) => {
   return (
-    <div>
-      <ul className={styles.imageContainer}>
-        {images.map((item) => (
-          <li key={item.id}>
-            <img src={item.urls.small} alt={item.alt_description || "Image"} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className={styles.imageContainer}>
+      {images.map((image) => (
+        <li key={image.id} onClick={openModal}>
+          <ImageCard image={image} modalContent={modalContent} />
+        </li>
+      ))}
+    </ul>
   );
 };
 
