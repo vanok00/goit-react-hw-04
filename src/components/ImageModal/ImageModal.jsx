@@ -1,6 +1,14 @@
 import Modal from "react-modal";
 import styles from "./ImageModal.module.css";
+import { useEffect } from "react";
 const ImageModal = ({ openModal, closeModal, src, alt }) => {
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  });
   return (
     <div>
       <Modal
@@ -8,6 +16,7 @@ const ImageModal = ({ openModal, closeModal, src, alt }) => {
         onRequestClose={closeModal}
         className={styles.modal}
         contentLabel="Example Modal"
+        overlayClassName={styles.overlay}
       >
         <div>
           <img className={styles.ImageModal} src={src} alt={alt} />
