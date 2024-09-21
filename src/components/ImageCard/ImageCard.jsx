@@ -1,6 +1,6 @@
-const ImageCard = ({ image, modalContent }) => {
+const ImageCard = ({ image, handleOpenImage }) => {
   return (
-    <div onClick={() => modalContent(image.urls.regular)}>
+    <div onClick={() => handleOpenImage(image.urls.regular)}>
       <img src={image.urls.small} alt={image.alt_description || "Image"} />
     </div>
   );

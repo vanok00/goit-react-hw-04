@@ -6,6 +6,7 @@ import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "../SearchBar/SearchBar";
 import ImageModal from "../ImageModal/ImageModal";
+import toast from "react-hot-toast";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -25,6 +26,12 @@ const App = () => {
         setIsError(false);
         setIsLoading(true);
         const data = await fetchArticles(page, query);
+        if (data.results.length === 0) {
+          toast.error("Sorry, there are no images found for your search!", {
+            position: "top-right",
+            duration: 3000,
+          });
+        }
         setImages((prev) => [...prev, ...data.results]);
       } catch {
         setIsError(true);
@@ -46,27 +53,20 @@ const App = () => {
     setPage(1);
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleModalContent = (src, alt) => {
+  const handleOpenImage = (src, alt) => {
     setModalImage(src);
     setAlt(alt);
+    setIsOpen(true);
   };
 
   return (
     <>
       <SearchBar setQuery={handleSetQuery} />
       {images.length > 0 && (
-        <ImageGallery
-          images={images}
-          openModal={openModal}
-          closeModal={closeModal}
-          modalContent={handleModalContent}
-        />
+        <ImageGallery images={images} handleOpenImage={handleOpenImage} />
       )}
       {isLoading && <Loader />}
       {isError && query && <ErrorMessage />}

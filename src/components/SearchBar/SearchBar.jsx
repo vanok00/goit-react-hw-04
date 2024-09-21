@@ -15,6 +15,7 @@ const SearchBar = ({ setQuery }) => {
         duration: 3000,
         position: "top-right",
       });
+      return;
     }
     setQuery(values.query);
   };
