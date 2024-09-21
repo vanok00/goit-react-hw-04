@@ -17,6 +17,7 @@ const App = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState("");
   const [alt, setAlt] = useState("");
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     if (!query) return;
@@ -31,8 +32,10 @@ const App = () => {
             position: "top-right",
             duration: 3000,
           });
+          return;
         }
         setImages((prev) => [...prev, ...data.results]);
+        setTotalPages(data.total_pages);
       } catch {
         setIsError(true);
       } finally {
@@ -70,7 +73,7 @@ const App = () => {
       )}
       {isLoading && <Loader />}
       {isError && query && <ErrorMessage />}
-      {images.length > 0 && !isLoading && !isError && (
+      {images.length > 0 && !isLoading && !isError && page < totalPages && (
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
       <ImageModal
